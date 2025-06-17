@@ -1,4 +1,8 @@
 <x-layout>
-    <h1 class="text-3xl font-bold">HOME Page!!</h1>
+    <x-slot:heading>
+        Home Page
+    </x-slot:heading>
+
+    <h1">Hello from HOME page</h1>
 </x-layout>
 
