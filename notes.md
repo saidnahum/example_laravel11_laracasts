@@ -11,3 +11,15 @@ Controlador
 
 - Migraciones
 php artisan migrate:fresh corre todas las migraciones eliminando todos los datos de la db y atualizando solo el archivo de migraciones
+
+
+class Job extends Model { // El nombre de la clase debe coincidir con el nombre de la tabla en plural por convención, pero aquí lo dejamos como singular para que coincida con el ejemplo original.
+    // Si la tabla no sigue la convención de pluralización, se puede especificar el nombre de la tabla manualmente:
+    // protected $table = 'job_listings'; // Descomentar si la tabla se llama 'job_listings' en lugar de 'job_listing'.
+    protected $table = "job_listing";
+
+    protected $fillable = ['title', 'salary']; // Son sólo los campos que se pueden asignar masivamente para evitar problemas de seguridad.
+}
+
+Las factories se utilizan para generar datos de exemplo para la DB
+

@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Job;
 
 Route::get('/', function () {
+
     return view('home', [
-        'greeting' => 'Hello Loco', // $greeting variable in home.blade.php
+        'greeting' => 'Hello Loco'
     ]);
 });
 
