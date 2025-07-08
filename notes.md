@@ -23,3 +23,9 @@ class Job extends Model { // El nombre de la clase debe coincidir con el nombre 
 
 Las factories se utilizan para generar datos de exemplo para la DB
 
+// Crear varios elementos en la DB con factory
+App\Models\User::factory()->create();
+
+$job = App\Models\Job::first();
+$job->employer;
+$job->employer->name;
