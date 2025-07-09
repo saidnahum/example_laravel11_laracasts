@@ -14,6 +14,11 @@ class Job extends Model {
     {
         return $this->belongsTo(Employer::class);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, foreignPivotKey: 'job_listing_id');
+    }
 }
 
 // El nombre de la clase debe coincidir con el nombre de la tabla en plural por convención, pero aquí lo dejamos como singular para que coincida con el ejemplo original.

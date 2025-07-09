@@ -29,3 +29,5 @@ App\Models\User::factory()->create();
 $job = App\Models\Job::first();
 $job->employer;
 $job->employer->name;
+
+Para crear una relación entre 2 tablas se debe gerar una table pivote que junte a dichas tablas.
