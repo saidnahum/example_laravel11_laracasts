@@ -31,3 +31,7 @@ $job->employer;
 $job->employer->name;
 
 Para crear una relación entre 2 tablas se debe gerar una table pivote que junte a dichas tablas.
+
+-El problema N1+ radica en que cada recorrido de cada registros genera una query, entonces si tienes
+100 registros se generarán 100 queries, es por eso qu entra el LazyLoading.
+
