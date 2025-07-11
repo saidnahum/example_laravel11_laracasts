@@ -35,3 +35,13 @@ Para crear una relación entre 2 tablas se debe gerar una table pivote que junte
 -El problema N1+ radica en que cada recorrido de cada registros genera una query, entonces si tienes
 100 registros se generarán 100 queries, es por eso qu entra el LazyLoading.
 
+$jobs = Job::all(); // Hace una query por cada indice de employer
+$jobs = Job::with('employer')->get(); // Hace una sola query recorriend cada indice de employer
+
+-En el archivo App/Providers/AppServiceProvider.php se configuran las opciones de laravel
+
+-Para agregar paginación al fetch de los datos se utiliza lo siguiente
+$jobs = Job::with('employer')->paginate(5);
+$jobs = Job::with('employer')->simplePaginate(5); // Sólo genera los botones de Anterior y Siguiente
+$jobs = Job::with('employer')->cursorPaginate(5); // Genera las queries al hacer hover sobre los links de paginación (Prevous, Next)
+
