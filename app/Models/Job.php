@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model {
     use HasFactory;
     protected $table = "job_listing";
-    protected $fillable = ['title', 'salary']; // Son sólo los campos que se pueden asignar masivamente para evitar problemas de seguridad.
+    //protected $fillable = ['title', 'salary', 'employer_id']; // Son sólo los campos que se pueden asignar masivamente para evitar problemas de seguridad.
+    protected $guarded = []; // Permite asignar masivamente todos los campos, pero no es recomendable por seguridad.
 
     public function employer()
     {

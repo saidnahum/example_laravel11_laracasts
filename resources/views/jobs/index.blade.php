@@ -7,6 +7,7 @@
         @foreach ($jobs as $job)
             <a class="block px-2 py-4 border border-gray-200 rounded-lg" href="jobs/{{ $job['id'] }}">
                 <div class="font-bold text-blue-500">
+                    {{-- {{ $jobs->firstItem() + $loop->index }}.- {{$job->employer->name}} --}}
                     {{$job->employer->name}}
                 </div>
                 <div>

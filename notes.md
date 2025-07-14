@@ -45,3 +45,4 @@ $jobs = Job::with('employer')->paginate(5);
 $jobs = Job::with('employer')->simplePaginate(5); // Sólo genera los botones de Anterior y Siguiente
 $jobs = Job::with('employer')->cursorPaginate(5); // Genera las queries al hacer hover sobre los links de paginación (Prevous, Next)
 
+- $job = Job::findOrFail($id) Sirve para que al buscar un id que no exista no devuelva null y se estropee la app
