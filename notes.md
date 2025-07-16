@@ -46,3 +46,6 @@ $jobs = Job::with('employer')->simplePaginate(5); // Sólo genera los botones de
 $jobs = Job::with('employer')->cursorPaginate(5); // Genera las queries al hacer hover sobre los links de paginación (Prevous, Next)
 
 - $job = Job::findOrFail($id) Sirve para que al buscar un id que no exista no devuelva null y se estropee la app
+
+// regenerate session token - Por motivos de seguridad - Hacerlo posterior al login attemp
+request()->session()->regenerate();

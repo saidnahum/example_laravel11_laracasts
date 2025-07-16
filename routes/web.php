@@ -1,87 +1,31 @@
 <?php
 
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Job;
 
-Route::get('/', function () {
+Route::view('/', 'home', ['greeting' => 'Hello Loco']);
+Route::view('/contact', 'contact');
 
-    return view('home', [
-        'greeting' => 'Hello Loco'
-    ]);
+// Job Routes
+Route::controller(JobController::class)->group(function(){
+    Route::get('/jobs', 'index');
+    Route::get('/jobs/create', 'create');
+    Route::get('/jobs/{job}', 'show');
+    Route::post('/jobs', 'store');
+    Route::get('/jobs/{job}/edit', 'edit');
+    Route::patch('/jobs/{job}', 'update');
+    Route::delete('/jobs/{job}', 'destroy');
 });
 
-// Index
-Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->latest()->paginate(5);
-    //$jobs = Job::with('employer')->cursorPaginate(5); // Genera las queries al hacer hover sobre los links de paginación
-    //$jobs = Job::with('employer')->simplePaginate(5); // Sólo genera dos botones, prevous y next, sin números de página
+// Auth Routes
+Route::get("/register", [RegisterUserController::class, "create"]);
+Route::post("/register", [RegisterUserController::class, "store"]);
+Route::get("/login", [SessionController::class, "create"]);
+Route::post("/login", [SessionController::class, "store"]);
+Route::post("/logout", [SessionController::class, "destroy"]);
 
-    return view('jobs.index', [
-        'jobs' => $jobs
-    ]);
-});
 
-// Create
-Route::get('/jobs/create', function (){
-    return view('jobs.create');
-});
+//Route::resource('jobs', JobController::class);
 
-//Show
-Route::get('/jobs/{id}', function ($id){
-    $job = Job::find($id);
-    return view('jobs.show', ['job' => $job]);
-});
-
-//Store
-Route::post('/jobs', function (){
-    request()->validate([
-        'title' => ['required', 'min:3'],
-        'salary' => ['required', 'numeric', 'min:0']
-    ]);
-
-    Job::create([
-        'title' => request('title'),
-        'salary' => request('salary'),
-        'employer_id' => 1
-    ]);
-
-    return redirect('/jobs');
-});
-
-// Edit
-Route::get('/jobs/{id}/edit', function ($id){
-    $job = Job::find($id);
-    return view('jobs.edit', ['job' => $job]);
-});
-
-// Update
-Route::patch('/jobs/{id}', function ($id){
-    // Validate
-    request()->validate([
-        'title' => ['required', 'min:3'],
-        'salary' => ['required', 'numeric', 'min:0']
-    ]);
-
-    // Authorize and update
-    $job = Job::findOrFail($id);
-    $job->update([
-        'title' => request('title'),
-        'salary' => request('salary'),
-        'employer_id' => 1 // Assuming the employer is always 1 for simplicity
-    ]);
-
-    // Redirect to the job page
-    return redirect('/jobs/'. $job->id);
-
-});
-
-// Destroy
-Route::delete('/jobs/{id}', function ($id){
-    Job::findOrFail($id)->delete();
-
-    return redirect('/jobs');
-});
-
-Route::get('/contact', function () {
-    return view('contact');
-});
