@@ -7,9 +7,11 @@
     <p class="text-gray-600">Employer: {{ $job->employer->name }}</p>
     <p>Salary: ${{ number_format($job->salary, 0) }}</p>
 
-    <p class="mt-6">
-        <x-button href="/jobs/{{ $job->id }}/edit">
-            Edit Job
-        </x-button>
-    </p>
+    @can('edit', $job)
+        <p class="mt-6">
+            <x-button href="/jobs/{{ $job->id }}/edit">
+                Edit Job
+            </x-button>
+        </p>
+    @endcan
 </x-layout>
