@@ -3,7 +3,17 @@
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
+use App\Mail\JobPosted;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+Route::get('test', function(){
+    Mail::to('said@snmc.com')->send(
+        new JobPosted()
+    );
+
+    return "Done";
+});
 
 Route::view('/', 'home', ['greeting' => 'Hello Loco']);
 Route::view('/contact', 'contact');
